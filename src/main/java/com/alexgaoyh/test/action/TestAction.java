@@ -12,6 +12,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alexgaoyh.test.entity.TestEntity;
 import com.alexgaoyh.test.service.TestService;
 
+/**
+ * test方法，与业务无关
+ * @author gaoyihang
+ *
+ */
 @Controller
 @RequestMapping(value="test")
 public class TestAction {
