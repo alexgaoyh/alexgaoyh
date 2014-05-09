@@ -1,0 +1,1 @@
+#1: 发送邮件的功能，需要手动更改  spring-smtp-mail.xml 配置文件的username&&password两个参数，调用方法为直接调用EmailUtil.send(subject, content, to);

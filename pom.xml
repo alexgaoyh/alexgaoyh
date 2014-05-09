@@ -39,6 +39,11 @@
 	        <artifactId>spring-aop</artifactId>
 	        <version>4.0.2.RELEASE</version>
 	    </dependency>
+	    <dependency>
+	        <groupId>org.springframework</groupId>
+	        <artifactId>spring-context-support</artifactId>
+	        <version>4.0.2.RELEASE</version>
+	    </dependency>
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -99,6 +104,13 @@
 			<version>1.5.6</version>
 		</dependency>
 		
+		<!-- emial support -->
+		<dependency>
+		    <groupId>javax.mail</groupId>
+		    <artifactId>mail</artifactId>
+		    <version>1.4.7</version>
+		</dependency>
+
 	</dependencies>
 	<build>
 		<finalName>web</finalName>

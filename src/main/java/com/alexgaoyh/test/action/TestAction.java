@@ -1,6 +1,7 @@
 package com.alexgaoyh.test.action;
 
 import javax.annotation.Resource;
+import javax.mail.MessagingException;
 
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
@@ -11,6 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.alexgaoyh.test.entity.TestEntity;
 import com.alexgaoyh.test.service.TestService;
+import com.alexgaoyh.util.email.Email;
+import com.alexgaoyh.util.email.EmailUtil;
 
 /**
  * test方法，与业务无关
