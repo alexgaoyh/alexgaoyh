@@ -32,6 +32,8 @@ public class TestAction {
 	
     @RequestMapping(value="login")  
     public ModelAndView login(){
+    	//发送邮件demo
+    	//EmailUtil.send("subject", "content", "924099504@qq.com");
         return new ModelAndView("views/test");
     }
     
