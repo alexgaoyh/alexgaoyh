@@ -41,6 +41,7 @@ public class TestAction {
     @ResponseBody
     public String saveEntity() throws Exception{
     	TestEntity te = new TestEntity();
+    	te.setName("alexgaoyh");
     	testService.saveOrUpdate(te);
     	return JSONObject.valueToString(te);
     }
