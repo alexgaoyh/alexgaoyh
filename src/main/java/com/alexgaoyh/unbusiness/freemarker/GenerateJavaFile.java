@@ -15,6 +15,7 @@ import freemarker.template.DefaultObjectWrapper;
 import freemarker.template.Template;
 
 /**
+ * 通过设定参数值，生成对应的action dao entity service 对应的java类
  * 修改demo()方法内部的root.put()的value值，运行即可
  * @author gaoyihang
  *
@@ -28,12 +29,12 @@ public class GenerateJavaFile {
 	public static void demo() {
 
 		Map<String, Object> root = new HashMap<String, Object>();
-		root.put("packageName", "com.alexgaoyh.freemarkerTest.freemarker");//包路径
-		root.put("className", "User");//类名称
-		root.put("springName", "user");//类名称的首字母小写
+		root.put("packageName", "com.alexgaoyh.sysman.admin");//包路径
+		root.put("className", "SysmanRole");//类名称
+		root.put("springName", "sysmanRole");//类名称的首字母小写
 		root.put("author", "alexgaoyh");//作者
-		root.put("tableName", "user");//表名称
-		root.put("entityNameCN", "用户表");//类描述
+		root.put("tableName", "SYSMAN_ROLE");//表名称
+		root.put("entityNameCN", "用户后台登陆用户角色表--RBAC权限管理");//类描述
 		root.put("date", new Date().toString());//创建时间
 		
 		String workDir = (String) System.getProperties().get("user.dir");
