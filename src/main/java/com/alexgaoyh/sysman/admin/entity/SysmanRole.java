@@ -50,6 +50,38 @@ public class SysmanRole extends BaseEntity{
 	@ManyToOne
 	@JoinColumn(name = "creater_id")
 	private SysmanUser creater;
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public List<SysmanResource> getResource() {
+		return resource;
+	}
+
+	public void setResource(List<SysmanResource> resource) {
+		this.resource = resource;
+	}
+
+	public SysmanUser getCreater() {
+		return creater;
+	}
+
+	public void setCreater(SysmanUser creater) {
+		this.creater = creater;
+	}
 	
 	
 }

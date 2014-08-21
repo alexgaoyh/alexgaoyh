@@ -29,6 +29,11 @@ public class SysmanUserServiceImpl extends BaseServiceImpl<SysmanUser> implement
 	private SysmanUserDao getDao(){
 		return (SysmanUserDao) this.baseDao ;
 	}
+
+	@Override
+	public SysmanUser findByName(String userName) {
+		return this.getDao().findByName(userName);
+	}
 	
 
 

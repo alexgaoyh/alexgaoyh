@@ -2,9 +2,9 @@ package com.alexgaoyh.sysman.admin.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
+import com.alexgaoyh.common.dao.impl.BaseDaoImpl;
 import com.alexgaoyh.sysman.admin.dao.SysmanUserDao;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
-import com.alexgaoyh.common.dao.impl.BaseDaoImpl;
 
 /**
  * 
@@ -15,6 +15,12 @@ import com.alexgaoyh.common.dao.impl.BaseDaoImpl;
  */
 @Repository
 public class SysmanUserDaoImpl extends BaseDaoImpl<SysmanUser> implements SysmanUserDao {
+
+	@Override
+	public SysmanUser findByName(String userName) {
+		String hql = "from "+ this.clazz.getName() + " where username = ? and deleteFlag=0" ;
+		return this.queryForObject(hql, new Object[]{userName});
+	}
 	
 
 }

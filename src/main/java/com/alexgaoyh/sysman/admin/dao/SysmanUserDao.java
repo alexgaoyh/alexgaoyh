@@ -12,5 +12,5 @@ import com.alexgaoyh.common.dao.BaseDao;
  */
 public interface SysmanUserDao extends BaseDao<SysmanUser> {
 	
-
+	SysmanUser findByName(String userName);
 }

@@ -70,6 +70,62 @@ public class SysmanResource extends BaseEntity{
 	 */
 	@Column(length = 200)
 	private String href;
+
+	public Integer getResourceType() {
+		return resourceType;
+	}
+
+	public void setResourceType(Integer resourceType) {
+		this.resourceType = resourceType;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Integer getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(Integer orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public SysmanResource getParent() {
+		return parent;
+	}
+
+	public void setParent(SysmanResource parent) {
+		this.parent = parent;
+	}
+
+	public List<SysmanResource> getSubResource() {
+		return subResource;
+	}
+
+	public void setSubResource(List<SysmanResource> subResource) {
+		this.subResource = subResource;
+	}
+
+	public String getHref() {
+		return href;
+	}
+
+	public void setHref(String href) {
+		this.href = href;
+	}
 	
 }
 

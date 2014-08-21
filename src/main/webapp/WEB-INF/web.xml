@@ -59,8 +59,6 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 	
-	
-	
 	<!-- ContextLoaderListener：Spring MVC在Web容器中的启动类，负责Spring IoC容器在Web上下文中的初始化-->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -71,10 +69,17 @@
 		<param-value>classpath:*-config.xml</param-value>
 	</context-param>
 	
+	<!-- Spring 刷新Introspector防止内存泄露 -->
+    <listener>
+        <listener-class>
+            org.springframework.web.util.IntrospectorCleanupListener
+        </listener-class>
+    </listener>
 	
-
-
-
+	<!-- session超时定义,单位为分钟 -->  
+    <session-config>  
+        <session-timeout>30</session-timeout>  
+    </session-config>  
 
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

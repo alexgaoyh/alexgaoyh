@@ -12,5 +12,5 @@ import com.alexgaoyh.common.service.BaseService;
  */
 public interface SysmanUserService extends BaseService<SysmanUser> {
 
-	
+	SysmanUser findByName(String userName);
 }

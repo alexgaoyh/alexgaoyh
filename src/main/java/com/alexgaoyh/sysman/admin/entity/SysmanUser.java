@@ -83,4 +83,84 @@ public class SysmanUser extends BaseEntity{
 	 * 1 : 正常  2 :禁用
 	 */
 	private Integer status;
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public SysmanUser getCreater() {
+		return creater;
+	}
+
+	public void setCreater(SysmanUser creater) {
+		this.creater = creater;
+	}
+
+	public String getRealName() {
+		return realName;
+	}
+
+	public void setRealName(String realName) {
+		this.realName = realName;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getPosition() {
+		return position;
+	}
+
+	public void setPosition(String position) {
+		this.position = position;
+	}
+
+	public String getPositonDesc() {
+		return positonDesc;
+	}
+
+	public void setPositonDesc(String positonDesc) {
+		this.positonDesc = positonDesc;
+	}
+
+	public List<SysmanRole> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(List<SysmanRole> roles) {
+		this.roles = roles;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
 }
