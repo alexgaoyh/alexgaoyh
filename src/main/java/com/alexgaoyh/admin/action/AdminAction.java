@@ -1,5 +1,8 @@
 package com.alexgaoyh.admin.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -83,14 +86,17 @@ public class AdminAction {
 		System.out.println(token.getUsername());
 		System.out.println(token.getPassword());
 		
-		ModelAndView mav = new ModelAndView("views/admin/index");
+		Map<String, Boolean> map = new HashMap<String, Boolean>();
+		
+		boolean loginStatus = false;
+		
 		try {
 			Subject subject = SecurityUtils.getSubject();
 			subject.login(token);
 			token.clear();
 			SysmanUser user = (SysmanUser) subject.getPrincipal();
 			subject.getSession().setAttribute("adminCurrentUser", user);
-			mav.setViewName("views/admin//index");
+			loginStatus = true;
 
 		} catch (UnknownAccountException ex) {
 			ex.printStackTrace();
@@ -105,6 +111,10 @@ public class AdminAction {
 			request.setAttribute("error",
 					"Login NOT SUCCESSFUL - cause not known!");
 		}
+		map.put("loginStatus", loginStatus);
+		
+		ModelAndView mav = new ModelAndView("views/admin/index", map);
+
 		return mav;
 	}
 }

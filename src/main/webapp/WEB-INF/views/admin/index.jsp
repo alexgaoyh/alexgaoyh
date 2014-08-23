@@ -7,12 +7,23 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 </head>
 <body>
-<f:view>
-
-</f:view>
+	<script type="text/javascript" src="<%=context %>/views/Scripts/jquery-1.4.1.js"></script>
+	Login ${loginStatus}...
 </body>
+	<script type="text/javascript">
+		var loginStatus = ${loginStatus};
+		var context_ = '${context_}';
+		
+		$(document).ready(function(){
+			if(loginStatus == true){
+				window.location.href = context_ + "/admin/manager";
+			}
+			if(loginStatus == false){
+				window.location.href = context_ + "/admin/login";
+			}
+		});
+	</script>
 </html>
