@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+					http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+					http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+					http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+					 http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+	>
+	<description>Shiro Configuration</description>
+
+	<bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+		<property name="realm" ref="shiroWebRealm" />
+		<property name="cacheManager" ref="cacheManager" />
+	</bean>
+
+	<bean id="shiroWebRealm" class="com.alexgaoyh.admin.shiro.service.ShiroDbRealm">
+		<!-- <property name="credentialsMatcher" ref="hashedCredentialsMatcher" /> -->
+	</bean>
+
+	<!-- <bean id="hashedCredentialsMatcher"
+		class="org.apache.shiro.authc.credential.HashedCredentialsMatcher">
+		<property name="hashAlgorithmName" value="MD5" />
+		<property name="storedCredentialsHexEncoded" value="true" />
+		<property name="hashIterations" value="1" />
+	</bean> -->
+
+
+	<bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+		<property name="securityManager" ref="securityManager" />
+		<property name="loginUrl" value="/admin/login" />
+		<property name="successUrl" value="/admin/manager" />
+		<property name="unauthorizedUrl" value="/admin/defined" />
+		<!-- The 'filters' property is not necessary since any declared javax.servlet.Filter 
+			bean defined will be automatically acquired and available via its beanName 
+			in chain definitions, but you can perform overrides or parent/child consolidated 
+			configuration here if you like: -->
+		<!-- <property name="filters"> <util:map> <entry key="aName" value-ref="someFilterPojo"/> 
+			</util:map> </property> -->
+		<property name="filterChainDefinitionMap" ref="filterChainFactoryBean" />
+	</bean>
+	
+	<bean id ="filterChainFactoryBean" class ="com.alexgaoyh.admin.shiro.common.FilterChainFactoryBean">
+	<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager" />
+	<bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor" />
+
+</beans>
