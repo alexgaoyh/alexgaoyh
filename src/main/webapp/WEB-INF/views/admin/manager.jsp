@@ -115,7 +115,7 @@ Purchase: http://themeforest.net/item/metronic-responsive-admin-dashboard-templa
 		<!-- BEGIN PAGE -->
 		<div class="page-content">
 		</div>
-		
+
 
 		<!-- END PAGE -->
 
