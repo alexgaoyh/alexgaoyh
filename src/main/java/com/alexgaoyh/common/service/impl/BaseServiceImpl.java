@@ -41,5 +41,11 @@ public class BaseServiceImpl <E extends BaseEntity> implements BaseService<E>{
 		return this.getBaseDao().get(pid);
 	}
 
+	@Override
+	public void evict(Object entity) {
+		this.getBaseDao().evict(entity);
+		
+	}
+
 
 }

@@ -25,5 +25,7 @@ public interface BaseService<E extends BaseEntity> {
 	
 	E get(String pid);
 	
+	void evict(Object entity);
+	
 	
 }
