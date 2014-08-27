@@ -37,7 +37,7 @@ public class BaseServiceImpl <E extends BaseEntity> implements BaseService<E>{
 	}
 
 	@Override
-	public E get(String pid) {
+	public E get(Integer pid) {
 		return this.getBaseDao().get(pid);
 	}
 

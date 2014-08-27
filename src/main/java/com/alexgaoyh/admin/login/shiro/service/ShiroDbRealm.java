@@ -1,4 +1,4 @@
-package com.alexgaoyh.admin.shiro.service;
+package com.alexgaoyh.admin.login.shiro.service;
 
 import java.util.HashSet;
 import java.util.List;
@@ -56,7 +56,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 	}
 	
 	private void setMenuPerms(Set<String> permissions, SysmanResource resource) {
-		permissions.add(resource.getPid());
+		permissions.add(resource.getPid()+"");
 		if(resource.getParent()!=null){
 			setMenuPerms(permissions, resource.getParent());
 		}

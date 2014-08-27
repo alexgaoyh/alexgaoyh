@@ -69,7 +69,7 @@ public class BaseDaoImpl<E extends BaseEntity> extends HibernateTemplate impleme
 	}
 
 	@Override
-	public E get(String pid) {
+	public E get(Integer pid) {
 		return (E) this.getSessionFactory().getCurrentSession().get(this.clazz, pid);
 	}
 

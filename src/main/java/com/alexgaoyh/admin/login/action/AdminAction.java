@@ -1,4 +1,4 @@
-package com.alexgaoyh.admin.action;
+package com.alexgaoyh.admin.login.action;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -20,7 +20,7 @@ public interface BaseDao<E extends BaseEntity> {
 	
 	E queryForObject(String hql, Object[] parameters);
 	
-	E get(String pid);
+	E get(Integer pid);
 	
 	void evict(Object entity);
 }

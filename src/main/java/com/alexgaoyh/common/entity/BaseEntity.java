@@ -26,10 +26,10 @@ public class BaseEntity implements Serializable {
 	public final static int DELETE_FLAG_NO = 0 ;
 
 	@Id
-	@GeneratedValue(generator = "uuidGenerator")
-	@GenericGenerator(name = "uuidGenerator", strategy = "uuid")
+	@GeneratedValue(generator = "_increment")
+	@GenericGenerator(name = "_increment", strategy = "increment")
 	@Column(length=32)
-	private String pid;
+	private Integer pid;
 	
 	/**
 	 * 删除标志  1已经删除，0 正常
@@ -40,11 +40,11 @@ public class BaseEntity implements Serializable {
 	@Temporal(TemporalType.TIMESTAMP)
 	private  Date createTime  = new Date ();
 
-	public String getPid() {
+	public Integer getPid() {
 		return pid;
 	}
 
-	public void setPid(String pid) {
+	public void setPid(Integer pid) {
 		this.pid = pid;
 	}
 

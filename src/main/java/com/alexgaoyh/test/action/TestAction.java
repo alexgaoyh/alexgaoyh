@@ -1,7 +1,6 @@
 package com.alexgaoyh.test.action;
 
 import javax.annotation.Resource;
-import javax.mail.MessagingException;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.crypto.hash.Md5Hash;
@@ -11,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alexgaoyh.sysman.admin.entity.SysmanResource;
+import com.alexgaoyh.sysman.admin.entity.SysmanRole;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
+import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
+import com.alexgaoyh.sysman.admin.service.SysmanRoleService;
 import com.alexgaoyh.sysman.admin.service.SysmanUserService;
 import com.alexgaoyh.test.entity.TestEntity;
 import com.alexgaoyh.test.service.TestService;
-import com.alexgaoyh.util.email.Email;
-import com.alexgaoyh.util.email.EmailUtil;
 
 /**
  * test方法，与业务无关
@@ -31,6 +32,12 @@ public class TestAction {
 	
 	@Resource
 	private SysmanUserService sysmanUserService;
+	
+	@Resource
+	private SysmanRoleService sysmanRoleService;
+	
+	@Resource
+	private SysmanResourceService sysmanResourceService;
 	
 	@Resource
 	private TestService testService;
@@ -62,6 +69,29 @@ public class TestAction {
     	su.setStatus(SysmanUser.STATUS_NORMAL);
     	sysmanUserService.saveOrUpdate(su);
     	return JSONObject.valueToString(su);
+    }
+    
+    @RequestMapping(value="test2")
+    @ResponseBody
+    public String saveSysmanRoleEntity() throws Exception {
+    	SysmanRole sr = new SysmanRole();
+    	sr.setDescription("系统管理员");
+    	sr.setName("系统管理员");
+    	sysmanRoleService.saveOrUpdate(sr);
+    	return JSONObject.valueToString(sr);
+    }
+    
+    @RequestMapping(value="test3")
+    @ResponseBody
+    public String saveSysmanResourceEntity() throws Exception {
+    	SysmanResource sr = new SysmanResource();
+    	sr.setHref("/");
+    	sr.setDescription("系统管理员");
+    	sr.setName("系统管理员");
+    	sr.setOrderNo(1);
+    	sr.setResourceType(SysmanResource.TYPE_MENU);
+    	sysmanResourceService.saveOrUpdate(sr);
+    	return JSONObject.valueToString(sr);
     }
     
 }

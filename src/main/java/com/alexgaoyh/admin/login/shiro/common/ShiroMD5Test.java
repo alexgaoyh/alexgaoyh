@@ -1,4 +1,4 @@
-package com.alexgaoyh.admin.shiro.common;
+package com.alexgaoyh.admin.login.shiro.common;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
 

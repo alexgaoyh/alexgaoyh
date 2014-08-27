@@ -16,7 +16,7 @@
 		<property name="cacheManager" ref="cacheManager" />
 	</bean>
 
-	<bean id="shiroWebRealm" class="com.alexgaoyh.admin.shiro.service.ShiroDbRealm">
+	<bean id="shiroWebRealm" class="com.alexgaoyh.admin.login.shiro.service.ShiroDbRealm">
 		<!-- <property name="credentialsMatcher" ref="hashedCredentialsMatcher" /> -->
 	</bean>
 
@@ -42,7 +42,7 @@
 		<property name="filterChainDefinitionMap" ref="filterChainFactoryBean" />
 	</bean>
 	
-	<bean id ="filterChainFactoryBean" class ="com.alexgaoyh.admin.shiro.common.FilterChainFactoryBean">
+	<bean id ="filterChainFactoryBean" class ="com.alexgaoyh.admin.login.shiro.common.FilterChainFactoryBean">
 	<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
 

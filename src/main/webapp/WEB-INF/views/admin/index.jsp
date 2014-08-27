@@ -19,10 +19,10 @@
 		
 		$(document).ready(function(){
 			if(loginStatus == true){
-				window.location.href = context_ + "/admin/manager";
+				setTimeout(window.location.href = context_ + "/admin/manager",10000);
 			}
 			if(loginStatus == false){
-				window.location.href = context_ + "/admin/login";
+				setTimeout(window.location.href = context_ + "/admin/login",10000);
 			}
 		});
 	</script>

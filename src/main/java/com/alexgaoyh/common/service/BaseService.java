@@ -23,7 +23,7 @@ public interface BaseService<E extends BaseEntity> {
 	
 	List<E> getAll();
 	
-	E get(String pid);
+	E get(Integer pid);
 	
 	void evict(Object entity);
 	
