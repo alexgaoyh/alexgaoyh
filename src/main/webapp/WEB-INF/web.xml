@@ -89,7 +89,15 @@
 		<url-pattern>/admin/*</url-pattern>
 	</filter-mapping>
 	
-	
+	<!-- captcha servlet config-->
+	<servlet>
+		<servlet-name>CaptchaServlet</servlet-name>
+		<servlet-class>com.alexgaoyh.admin.login.shiro.captcha.servlet.CaptchaServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>CaptchaServlet</servlet-name>
+		<url-pattern>/servlet/captchaCode</url-pattern>
+	</servlet-mapping>
 	
 	<!-- session超时定义,单位为分钟 -->  
     <session-config>  

@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alexgaoyh.admin.login.shiro.captcha.constant.CaptchaConstant;
+import com.alexgaoyh.admin.login.shiro.captcha.exception.CaptchaException;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
 
 @Controller
@@ -76,42 +78,50 @@ public class AdminAction {
 	 */
 	@RequestMapping(value = "/doLogin", method = RequestMethod.POST)
 	public ModelAndView doLogin(HttpServletRequest request, HttpServletResponse response) {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		
-		Md5Hash md5Hash = new Md5Hash(password);
-		
-		UsernamePasswordToken token = new UsernamePasswordToken(username,md5Hash.toHex());
-		
-		System.out.println(token.getUsername());
-		System.out.println(token.getPassword());
-		
+
 		Map<String, Boolean> map = new HashMap<String, Boolean>();
 		
 		boolean loginStatus = false;
+		boolean captchaStatus = false;
 		
-		try {
-			Subject subject = SecurityUtils.getSubject();
-			subject.login(token);
-			token.clear();
-			SysmanUser user = (SysmanUser) subject.getPrincipal();
-			subject.getSession().setAttribute("adminCurrentUser", user);
-			loginStatus = true;
-
-		} catch (UnknownAccountException ex) {
-			ex.printStackTrace();
-			request.setAttribute("error", ex.getMessage());
-
-		} catch (IncorrectCredentialsException ex) {
-			ex.printStackTrace();
-			request.setAttribute("error", ex.getMessage());
+		String captcha = request.getParameter("captcha");
+		String exitCode = (String) request.getSession().getAttribute(CaptchaConstant.KEY_CAPTCHA);
+		if (null == captcha || !captcha.equalsIgnoreCase(exitCode)) {
+			System.out.println("验证码错误");
+		}else{
+			captchaStatus = true;
+			
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			
+			Md5Hash md5Hash = new Md5Hash(password);
+			
+			UsernamePasswordToken token = new UsernamePasswordToken(username,md5Hash.toHex());
+			
+			System.out.println(token.getUsername());
+			System.out.println(token.getPassword());
+			
+			try {
+				Subject subject = SecurityUtils.getSubject();
+				subject.login(token);
+				token.clear();
+				SysmanUser user = (SysmanUser) subject.getPrincipal();
+				subject.getSession().setAttribute("adminCurrentUser", user);
+				loginStatus = true;
+				
+			} catch (UnknownAccountException ex) {
+				ex.printStackTrace();
+				
+			} catch (IncorrectCredentialsException ex) {
+				ex.printStackTrace();
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
 		}
-		catch (Exception ex) {
-			ex.printStackTrace();
-			request.setAttribute("error",
-					"Login NOT SUCCESSFUL - cause not known!");
-		}
+		
 		map.put("loginStatus", loginStatus);
+		map.put("captchaStatus", captchaStatus);
 		
 		ModelAndView mav = new ModelAndView("views/admin/index", map);
 

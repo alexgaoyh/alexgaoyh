@@ -133,7 +133,24 @@
 				</div>
 
 			</div>
+			
+			<div class="control-group">
 
+				<label class="control-label visible-ie8 visible-ie9">验证码</label>
+
+				<div class="controls">
+
+					<div class="input-icon left">
+
+						<i class="icon-lock"></i> 
+						<input style="width:160px;" class="m-wrap placeholder-no-fix" type="text" placeholder="Captcha" name="Captcha" id="Captcha" />
+						<img style="float:right;" title="点击更换" id="img_captcha" onclick="javascript:refreshCaptcha();" src="<%=context %>/servlet/captchaCode">
+					</div>
+
+				</div>
+
+			</div>
+			
 			<div class="form-actions">
 
 				<label class="checkbox"> <input type="checkbox"
@@ -427,6 +444,11 @@
 			var s = document.getElementsByTagName('script')[0];
 			s.parentNode.insertBefore(ga, s);
 		})();
+		
+		var context_ = '${context_}';
+		function refreshCaptcha() {
+	        $("#img_captcha").attr("src",context_ + "/servlet/captchaCode?t=" + Math.random());
+	    }
 	</script>
 </body>
 

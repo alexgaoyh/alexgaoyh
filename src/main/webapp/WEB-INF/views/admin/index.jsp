@@ -11,10 +11,12 @@
 </head>
 <body>
 	<script type="text/javascript" src="<%=context %>/views/Scripts/jquery-1.4.1.js"></script>
-	Login ${loginStatus}...
+	Login ${loginStatus}...<span id="message"></span>
 </body>
 	<script type="text/javascript">
 		var loginStatus = ${loginStatus};
+		var captchaStatus = ${captchaStatus};
+		
 		var context_ = '${context_}';
 		
 		$(document).ready(function(){
@@ -22,6 +24,9 @@
 				setTimeout(window.location.href = context_ + "/admin/manager",10000);
 			}
 			if(loginStatus == false){
+				if(captchaStatus == false){
+					$("#message").html("验证码错误！");
+				}
 				setTimeout(window.location.href = context_ + "/admin/login",10000);
 			}
 		});
