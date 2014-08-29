@@ -109,7 +109,7 @@
 					<div class="input-icon left">
 
 						<i class="icon-user"></i> <input class="m-wrap placeholder-no-fix"
-							type="text" placeholder="Username" name="username" />
+							type="text" placeholder="Username" name="userName" id="userName" />
 
 					</div>
 
@@ -154,7 +154,7 @@
 			<div class="form-actions">
 
 				<label class="checkbox"> <input type="checkbox"
-					name="remember" value="1" /> Remember me
+					name="rememberMe" value="true" /> Remember me
 
 				</label>
 
@@ -422,6 +422,12 @@
 			App.init();
 
 			Login.init();
+			
+			var userName = '${userName}';
+			if(userName != null || userName != ""){
+				$("#userName").val(userName);
+			}
+			
 
 		});
 	</script>

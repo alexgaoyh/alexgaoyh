@@ -38,6 +38,16 @@ public class AdminAction {
 	 */
 	@RequestMapping(value="login")  
     public ModelAndView login(@RequestParam(value = "error", required = false) boolean error,ModelMap model){
+		
+		Subject subject = SecurityUtils.getSubject();
+		SysmanUser user = (SysmanUser) subject.getPrincipal();
+		
+		
+		if(user != null){
+			model.put("userName", user.getUserName());
+			System.out.println("user = "+user.getUserName());
+		}
+		
 		if (error == true) {
 			model.put("error","You have entered an invalid username or password!");
 		} else {
@@ -84,19 +94,20 @@ public class AdminAction {
 		boolean loginStatus = false;
 		boolean captchaStatus = false;
 		
-		String captcha = request.getParameter("captcha");
+		String captcha = request.getParameter("Captcha");
 		String exitCode = (String) request.getSession().getAttribute(CaptchaConstant.KEY_CAPTCHA);
 		if (null == captcha || !captcha.equalsIgnoreCase(exitCode)) {
 			System.out.println("验证码错误");
 		}else{
 			captchaStatus = true;
 			
-			String username = request.getParameter("username");
+			String username = request.getParameter("userName");
 			String password = request.getParameter("password");
+			String rememberMe = request.getParameter("rememberMe");
 			
 			Md5Hash md5Hash = new Md5Hash(password);
 			
-			UsernamePasswordToken token = new UsernamePasswordToken(username,md5Hash.toHex());
+			UsernamePasswordToken token = new UsernamePasswordToken(username, md5Hash.toHex(), Boolean.parseBoolean(rememberMe));
 			
 			System.out.println(token.getUsername());
 			System.out.println(token.getPassword());
