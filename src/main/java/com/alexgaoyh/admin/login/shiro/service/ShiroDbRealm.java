@@ -71,7 +71,7 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		SysmanUser user  = sysmanUserService.findByName(username);
 		
 		sysmanUserService.evict(user);
-		user.setRoles(null);
+		//user.setRoles(null);
 		
 		if(user==null){
 			throw new  UnknownAccountException("用户帐号不存在！");

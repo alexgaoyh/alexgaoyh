@@ -126,8 +126,7 @@
 
 						<li><a href="inbox.html?a=view"> <span class="photo"><img
 									src="${pageContext.request.contextPath}/views/admin/media/image/avatar1.jpg" alt="" /></span>
-								<span class="subject"> <span class="from">Bob
-										Nilson</span> <span class="time">2 hrs</span>
+								<span class="subject"> <span class="from">${sysmanUser.userName}</span> <span class="time">2 hrs</span>
 
 							</span> <span class="message"> Vivamus sed nibh auctor nibh
 									congue nibh. auctor nibh auctor nibh... </span>
@@ -233,7 +232,7 @@
 				<li class="dropdown user"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown"> <img alt=""
 						src="${pageContext.request.contextPath}/views/admin/media/image/avatar1_small.jpg" />
-						<span class="username">Bob Nilson</span> <i
+						<span class="username">${sysmanUser.userName}</span> <i
 						class="icon-angle-down"></i>
 
 				</a>

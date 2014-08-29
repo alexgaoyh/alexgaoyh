@@ -66,6 +66,8 @@ public class AdminAction {
 	 */
 	@RequestMapping(value = "/denied", method = RequestMethod.GET)
 	public ModelAndView denied() {
+		Subject subject = SecurityUtils.getSubject();
+		SysmanUser user = (SysmanUser) subject.getPrincipal();
 		
 		return new ModelAndView("views/admin/denied");
 		
@@ -79,7 +81,14 @@ public class AdminAction {
 	@RequestMapping(value = "/manager", method = RequestMethod.GET)
 	public ModelAndView manager() {
 		
-		return new ModelAndView("views/admin/manager");
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		Subject subject = SecurityUtils.getSubject();
+		SysmanUser user = (SysmanUser) subject.getPrincipal();
+		
+		map.put("sysmanUser", user);
+		
+		return new ModelAndView("views/admin/manager", map);
 
 	}
 	

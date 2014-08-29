@@ -27,19 +27,19 @@
 			</form> <!-- END RESPONSIVE QUICK SEARCH FORM -->
 
 		</li>
+		
+		<li class="start active ">
+			<a href="index.html">
+				<i class="icon-home"></i> <span class="title">${sysmanUser.userName}</span> 
+				<span class="selected"></span>
+			</a>
+		</li>
 
-		<li class="start active "><a href="index.html"> <i
-				class="icon-home"></i> <span class="title">Dashboard</span> <span
-				class="selected"></span>
-
-		</a></li>
-
-		<li class=""><a href="javascript:;"> <i class="icon-cogs"></i>
-
-				<span class="title">Layouts</span> <span class="arrow "></span>
-
-		</a>
-
+		<li class="">
+			<a href="javascript:;">
+				<i class="icon-cogs"></i> <span class="title">Layouts</span> 
+				<span class="arrow "></span>
+			</a>
 			<ul class="sub-menu">
 
 				<li><a href="layout_horizontal_sidebar_menu.html">
