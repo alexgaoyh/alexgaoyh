@@ -39,7 +39,10 @@ public class AdminAction {
 	@RequestMapping(value="login")  
     public ModelAndView login(@RequestParam(value = "error", required = false) boolean error,ModelMap model){
 		
+		
 		Subject subject = SecurityUtils.getSubject();
+		//可以使用 subject.isAuthenticated() 以判断当前用户已经登录过了 此时可以直接通过subject.getSession()去获取我们放入session的信息了。
+		System.out.println(" subject.isAuthenticated() = "+subject.isAuthenticated());
 		SysmanUser user = (SysmanUser) subject.getPrincipal();
 		
 		
