@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <div class="page-sidebar nav-collapse collapse">
 
 	<!-- BEGIN SIDEBAR MENU -->
@@ -35,6 +36,9 @@
 			</a>
 		</li>
 
+		<c:forEach var="leftMenu" items="${sysmanResourceList}">
+			 <c:out value="${leftMenu.name}"></c:out>
+		</c:forEach>
 		<li class="">
 			<a href="javascript:;">
 				<i class="icon-cogs"></i> <span class="title">Layouts</span> 

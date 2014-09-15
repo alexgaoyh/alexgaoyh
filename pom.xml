@@ -137,7 +137,15 @@
             <artifactId>shiro-spring</artifactId>  
             <version>1.2.3</version>  
         </dependency>  
-        <!-- end of Shiro security -->  
+        <!-- end of Shiro security -->
+        
+        <!-- jstl jsp页面标签 -->
+        <dependency>
+			<groupId>jstl</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+        
 
 	</dependencies>
 	<build>

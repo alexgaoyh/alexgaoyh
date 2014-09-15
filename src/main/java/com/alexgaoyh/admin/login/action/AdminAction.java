@@ -1,6 +1,7 @@
 package com.alexgaoyh.admin.login.action;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,8 +22,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alexgaoyh.admin.login.shiro.captcha.constant.CaptchaConstant;
-import com.alexgaoyh.admin.login.shiro.captcha.exception.CaptchaException;
+import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
+import com.alexgaoyh.sysman.admin.util.SysmanResourceUtil;
 
 @Controller
 @RequestMapping(value="admin")
@@ -86,7 +88,10 @@ public class AdminAction {
 		Subject subject = SecurityUtils.getSubject();
 		SysmanUser user = (SysmanUser) subject.getPrincipal();
 		
+		List<SysmanResource> sysmanResourceList = SysmanResourceUtil.getResourceListByUser(user);
+		
 		map.put("sysmanUser", user);
+		map.put("sysmanResourceList", sysmanResourceList);
 		
 		return new ModelAndView("views/admin/manager", map);
 

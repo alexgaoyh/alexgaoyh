@@ -121,8 +121,8 @@
 				<prop key="hibernate.default_batch_fetch_size">${hibernate.default_batch_fetch_size}</prop>
 				<prop key="hibernate.max_fetch_depth">${hibernate.max_fetch_depth}</prop>
 				<prop key="hibernate.generate_statistics">${hibernate.generate_statistics}</prop>
-				<prop key="hibernate.bytecode.use_reflection_optimizer">${hibernate.bytecode.use_reflection_optimizer}</prop>
-
+				<prop key="hibernate.bytecode.use_reflection_optimizer"></prop>
+				<prop key="hibernate.enable_lazy_load_no_trans">${hibernate.enable_lazy_load_no_trans}</prop>
 			</props>
 		</property>
 	</bean>
