@@ -38,7 +38,7 @@ public class AdminAction {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value="login")  
+	@RequestMapping(value="login")
     public ModelAndView login(@RequestParam(value = "error", required = false) boolean error,ModelMap model){
 		
 		
@@ -76,7 +76,7 @@ public class AdminAction {
 	}
 	
 	/**
-	 * 跳转到adminpage页面
+	 * 跳转到manager页面
 	 * 
 	 * @return
 	 */
@@ -98,7 +98,7 @@ public class AdminAction {
 	}
 	
 	/**
-	 * den
+	 * 后台shiro登陆方法
 	 * @param request
 	 * @param response
 	 * @return
@@ -154,5 +154,22 @@ public class AdminAction {
 		ModelAndView mav = new ModelAndView("views/admin/index", map);
 
 		return mav;
+	}
+	
+	
+	/**
+	 * shiro 登出方法
+	 * @return
+	 */
+	@RequestMapping(value="logout")
+	public ModelAndView doLogout() {
+		Subject subject = SecurityUtils.getSubject();
+		if (subject.isAuthenticated()) {
+			SysmanUser user = (SysmanUser) subject.getPrincipal();
+			System.out.println("登出用户：" + user.getUserName() );
+			subject.logout(); // session 会销毁，在SessionListener监听session销毁，清理权限缓存
+		}
+		
+		return new ModelAndView("views/admin/login");
 	}
 }

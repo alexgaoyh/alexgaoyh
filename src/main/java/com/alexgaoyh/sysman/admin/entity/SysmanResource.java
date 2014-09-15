@@ -4,11 +4,14 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Where;
 
 import com.alexgaoyh.common.entity.BaseEntity;
 
@@ -61,8 +64,9 @@ public class SysmanResource extends BaseEntity{
 	/**
 	 * 子节点
 	 */
-	@OneToMany(mappedBy="parent")
+	@OneToMany(mappedBy="parent",fetch=FetchType.EAGER)
 	@OrderBy("orderNo")
+	@Where(clause="delete_flag=0")
 	private List<SysmanResource> subResource;
 	
 	/**

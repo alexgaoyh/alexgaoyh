@@ -1,3 +1,9 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%
+	String context = request.getContextPath();
+	pageContext.setAttribute("context_", context);
+%>
 <div class="header navbar navbar-inverse navbar-fixed-top">
 
 	<!-- BEGIN TOP NAVIGATION BAR -->
@@ -255,7 +261,7 @@
 						<li><a href="extra_lock.html"><i class="icon-lock"></i>
 								Lock Screen</a></li>
 
-						<li><a href="login.html"><i class="icon-key"></i> Log Out</a></li>
+						<li><a href="<%=context %>/admin/logout"><i class="icon-key"></i> Log Out</a></li>
 
 					</ul></li>
 
