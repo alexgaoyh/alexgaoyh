@@ -3,12 +3,10 @@ package com.alexgaoyh.sysman.admin.action;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
+import com.alexgaoyh.common.action.BaseController;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
 import com.alexgaoyh.sysman.admin.service.SysmanUserService;
 
@@ -21,7 +19,7 @@ import com.alexgaoyh.sysman.admin.service.SysmanUserService;
  */
 @Controller
 @RequestMapping(value="sysmanUser")
-public class SysmanUserAction  {
+public class SysmanUserAction extends BaseController<SysmanUser>  {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanUser.class);
 	

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.alexgaoyh.common.action.BaseController;
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
 
@@ -21,7 +22,7 @@ import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
  */
 @Controller
 @RequestMapping(value="sysmanResource")
-public class SysmanResourceAction  {
+public class SysmanResourceAction extends BaseController<SysmanResource> {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanResource.class);
 	

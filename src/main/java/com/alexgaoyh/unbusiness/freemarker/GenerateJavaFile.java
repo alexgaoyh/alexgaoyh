@@ -29,7 +29,7 @@ public class GenerateJavaFile {
 	public static void demo() {
 
 		Map<String, Object> root = new HashMap<String, Object>();
-		root.put("packageName", "com.alexgaoyh.sysman.admin");//包路径
+		root.put("packageName", "com.alexgaoyh.aaaaaaaaa.admin");//包路径
 		root.put("className", "SysmanRole");//类名称
 		root.put("springName", "sysmanRole");//类名称的首字母小写
 		root.put("author", "alexgaoyh");//作者
