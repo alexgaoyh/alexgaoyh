@@ -9,10 +9,11 @@
 <head>
 <title>Insert title here</title>
 </head>
-<body>
-	<script type="text/javascript" src="<%=context %>/views/Scripts/jquery-1.4.1.js"></script>
-	Login ${loginStatus}...<span id="message"></span>
-</body>
+	<body>
+		<script type="text/javascript" src="<%=context %>/views/Scripts/jquery-1.4.1.js"></script>
+		Login ${loginStatus}...<span id="message"></span>
+	</body>
+	
 	<script type="text/javascript">
 		var loginStatus = ${loginStatus};
 		var captchaStatus = ${captchaStatus};
@@ -21,13 +22,13 @@
 		
 		$(document).ready(function(){
 			if(loginStatus == true){
-				setTimeout(window.location.href = context_ + "/admin/manager",10000);
+				setTimeout(window.location.href = context_ + "/admin/manager",99999);
 			}
 			if(loginStatus == false){
 				if(captchaStatus == false){
 					$("#message").html("验证码错误！");
 				}
-				setTimeout(window.location.href = context_ + "/admin/login",10000);
+				setTimeout(window.location.href = context_ + "/admin/login",99999);
 			}
 		});
 	</script>
