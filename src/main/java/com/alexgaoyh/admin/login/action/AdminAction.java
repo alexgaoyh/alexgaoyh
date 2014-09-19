@@ -1,5 +1,6 @@
 package com.alexgaoyh.admin.login.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,14 +15,17 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.apache.shiro.subject.Subject;
+import org.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alexgaoyh.admin.login.shiro.captcha.constant.CaptchaConstant;
+import com.alexgaoyh.common.vo.TreeNode;
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
 import com.alexgaoyh.sysman.admin.util.SysmanResourceUtil;
@@ -171,5 +175,44 @@ public class AdminAction {
 		}
 		
 		return new ModelAndView("views/admin/login");
+	}
+	
+	
+	@RequestMapping(value="getMenus")
+    @ResponseBody
+	public String getMenus() {
+		
+		Subject subject = SecurityUtils.getSubject();
+		SysmanUser user = (SysmanUser) subject.getPrincipal();
+
+		List<SysmanResource> sysmanResourceList = SysmanResourceUtil.getResourceListByUser(user);
+		
+		return JSONObject.valueToString(resourceToTreeNode(sysmanResourceList));
+	}
+	
+	private List<TreeNode> resourceToTreeNode(List<SysmanResource> resource) {
+
+		if (resource != null && resource.size() > 0 && resource.get(0).getResourceType() == SysmanResource.TYPE_MENU) {
+			List<TreeNode> ch = new ArrayList<TreeNode>();
+			for (SysmanResource rr : resource) {
+				
+				TreeNode node = new TreeNode();
+				
+				if(rr.getHref()==null){
+					node.setId(rr.getPid());
+				}else{
+					node.setId(rr.getPid());
+				}
+				
+				node.setState("open");
+				node.setText(rr.getName());
+				ch.add(node);
+				node.setChildren(resourceToTreeNode(rr.getSubResource()));
+			}
+
+			return ch;
+		}
+
+		return null;
 	}
 }
