@@ -50,18 +50,19 @@
 			
 		})
 		
+		
 		var mainTabs = $("#main-tabs");
 		function openTab(title, url) {
 			if (mainTabs.tabs('exists', title)) {
 				mainTabs.tabs('select', title);
-				 var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
+				var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
 				if(iframeContext){
-					iframeContext[0].src = context_ + (url || title + ".do") 
+					iframeContext[0].src = context_ + url
 				} 
 			} else {
 				mainTabs.tabs('add', {
 					title : title,
-					content : createFrame(context_ + (url || title + ".do")),
+					content : createFrame(context_ + url),
 					closable : true
 				});
 			}
