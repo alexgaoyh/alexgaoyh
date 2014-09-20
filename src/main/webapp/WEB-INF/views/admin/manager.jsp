@@ -21,7 +21,12 @@
 	<!-- <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div> -->
 	
 	<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">
-		<ul id="subMenus" class="easyui-tree" data-options="url:'${pageContext.request.contextPath}/admin/getMenus',method:'get',animate:true">
+		<ul id="subMenus" class="easyui-tree" 
+			data-options="url:'${pageContext.request.contextPath}/admin/getMenus',
+						method:'get',animate:true,
+						onClick: function(node){
+							openTab(node.text, node.attributes.href);
+						}">
 			
 		</ul>  
 	</div>
@@ -38,10 +43,36 @@
 	<a href="<%=context %>/admin/logout"><i class="icon-key"></i> Log Out</a>
 </body>
 	<script type="text/javascript">
+	
+		var context_ = '${context_}';
 
 		$(document).ready(function() {
 			
 		})
+		
+		var mainTabs = $("#main-tabs");
+		function openTab(title, url) {
+			if (mainTabs.tabs('exists', title)) {
+				mainTabs.tabs('select', title);
+				 var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
+				if(iframeContext){
+					iframeContext[0].src = context_ + (url || title + ".do") 
+				} 
+			} else {
+				mainTabs.tabs('add', {
+					title : title,
+					content : createFrame(context_ + (url || title + ".do")),
+					closable : true
+				});
+			}
+
+		}
+
+		function createFrame(url) {
+			var s = '<iframe name="mainFrame" scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0"  allowtransparency="yes" src="'
+					+ url + '" style="width:100%;height:99%;"></iframe>';
+			return s;
+		}
 		
 	</script>
 </html>

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2014-09-15 17:07:08
+Date: 2014-09-20 14:09:31
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -40,6 +40,7 @@ CREATE TABLE `sysman_resource` (
 INSERT INTO `sysman_resource` VALUES ('1', '2014-08-27 16:05:40', '0', '系统管理', '/', '系统管理', '1', '1', null);
 INSERT INTO `sysman_resource` VALUES ('2', '2014-08-06 16:27:16', '0', '页面编辑员', '/', '页面编辑员', '2', '1', null);
 INSERT INTO `sysman_resource` VALUES ('3', '2014-09-15 16:17:48', '0', '用户管理', '/', '用户管理', '1', '1', '1');
+INSERT INTO `sysman_resource` VALUES ('4', '2014-09-15 17:14:37', '0', '权限管理', '/', '权限管理', '2', '1', '1');
 
 -- ----------------------------
 -- Table structure for `sysman_role`

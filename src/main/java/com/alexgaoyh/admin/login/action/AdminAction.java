@@ -206,6 +206,11 @@ public class AdminAction {
 				
 				node.setState("open");
 				node.setText(rr.getName());
+				
+				Map<String, Object> _temp = new HashMap<String, Object>();
+				_temp.put("href", rr.getHref());
+				node.setAttributes(_temp);
+				
 				ch.add(node);
 				node.setChildren(resourceToTreeNode(rr.getSubResource()));
 			}
