@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.alexgaoyh.common.action.BaseController;
 import ${packageName}.entity.${className};
 import ${packageName}.service.${className}Service;
+import com.alexgaoyh.common.service.BaseService;
 
 /**
  * 
@@ -26,7 +27,10 @@ public class ${className}Action extends BaseController<${className}> {
 
 	private static final Logger LOGGER = Logger.getLogger(${className}.class);
 	
-	@Resource
-	private ${className}Service ${springName}Service;
+	@Override
+	@Resource(name = "${className}ServiceImpl")
+	public void setBaseService(BaseService<${className}> baseService) {
+		this.baseService = baseService;
+	}
 
 }
