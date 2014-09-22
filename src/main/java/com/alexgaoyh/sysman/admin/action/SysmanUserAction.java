@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.alexgaoyh.common.action.BaseController;
+import com.alexgaoyh.common.service.BaseService;
+import com.alexgaoyh.sysman.admin.entity.SysmanRole;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
 import com.alexgaoyh.sysman.admin.service.SysmanUserService;
 
@@ -23,7 +25,10 @@ public class SysmanUserAction extends BaseController<SysmanUser>  {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanUser.class);
 	
-	@Resource
-	private SysmanUserService sysmanUserService;
-
+	@Override
+	@Resource(name = "sysmanUserServiceImpl")
+	public void setBaseService(BaseService<SysmanUser> baseService) {
+		this.baseService = baseService;
+	}
+	
 }

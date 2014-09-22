@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alexgaoyh.common.action.BaseController;
+import com.alexgaoyh.common.service.BaseService;
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.entity.SysmanRole;
 import com.alexgaoyh.sysman.admin.service.SysmanRoleService;
@@ -27,7 +28,11 @@ public class SysmanRoleAction extends BaseController<SysmanRole> {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanRole.class);
 	
-	@Resource
-	private SysmanRoleService sysmanRoleService;
+	@Override
+	@Resource(name = "sysmanRoleServiceImpl")
+	public void setBaseService(BaseService<SysmanRole> baseService) {
+		this.baseService = baseService;
+	}
+	
 
 }

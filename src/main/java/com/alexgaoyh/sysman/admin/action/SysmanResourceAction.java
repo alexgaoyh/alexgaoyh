@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alexgaoyh.common.action.BaseController;
+import com.alexgaoyh.common.service.BaseService;
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
 
@@ -26,7 +27,10 @@ public class SysmanResourceAction extends BaseController<SysmanResource> {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanResource.class);
 	
-	@Resource
-	private SysmanResourceService sysmanResourceService;
+	@Override
+	@Resource(name = "sysmanResourceServiceImpl")
+	public void setBaseService(BaseService<SysmanResource> baseService) {
+		this.baseService = baseService;
+	}
 
 }
