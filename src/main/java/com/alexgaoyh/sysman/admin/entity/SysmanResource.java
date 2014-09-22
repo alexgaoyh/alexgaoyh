@@ -11,6 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
+import org.codehaus.jackson.annotate.JsonIgnoreProperties;
 import org.hibernate.annotations.Where;
 
 import com.alexgaoyh.common.entity.BaseEntity;
@@ -24,6 +25,7 @@ import com.alexgaoyh.common.entity.BaseEntity;
  */
 @Entity
 @Table(name="SYSMAN_RESOURCE")
+@JsonIgnoreProperties("parent")
 public class SysmanResource extends BaseEntity{
 	
 	/** 资源类型-菜单级别 */

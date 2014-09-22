@@ -23,7 +23,7 @@ import com.alexgaoyh.sysman.admin.service.SysmanRoleService;
  * @Fri Aug 08 14:27:52 CST 2014
  */
 @Controller
-@RequestMapping(value="sysmanRole")
+@RequestMapping(value="admin/sysmanRole")
 public class SysmanRoleAction extends BaseController<SysmanRole> {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanRole.class);

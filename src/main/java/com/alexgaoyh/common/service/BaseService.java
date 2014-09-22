@@ -2,8 +2,11 @@ package com.alexgaoyh.common.service;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.alexgaoyh.common.dao.BaseDao;
 import com.alexgaoyh.common.entity.BaseEntity;
+import com.alexgaoyh.common.util.Pagination;
 
 public interface BaseService<E extends BaseEntity> {
 	
@@ -26,6 +29,8 @@ public interface BaseService<E extends BaseEntity> {
 	E get(Integer pid);
 	
 	void evict(Object entity);
+
+	Pagination<E> getPageData(DetachedCriteria condition, int page, int rows);
 	
 	
 }

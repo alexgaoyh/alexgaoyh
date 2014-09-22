@@ -2,9 +2,12 @@ package com.alexgaoyh.common.service.impl;
 
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.alexgaoyh.common.dao.BaseDao;
 import com.alexgaoyh.common.entity.BaseEntity;
 import com.alexgaoyh.common.service.BaseService;
+import com.alexgaoyh.common.util.Pagination;
 
 public class BaseServiceImpl <E extends BaseEntity> implements BaseService<E>{
 	
@@ -45,6 +48,23 @@ public class BaseServiceImpl <E extends BaseEntity> implements BaseService<E>{
 	public void evict(Object entity) {
 		this.getBaseDao().evict(entity);
 		
+	}
+
+	@Override
+	public Pagination<E> getPageData(DetachedCriteria condition, int page, int rows) {
+		Pagination<E> pagination = new Pagination<E>(page, rows);
+		
+		int total = this.getBaseDao().getRowCountByDetachedCriteria(condition);
+		pagination.setTotalCount(total);
+		
+		condition.setProjection(null);
+
+		if (total != 0) {
+			List<E> datas = this.getBaseDao().findByDetachedCriteria(condition, page, rows);
+			
+			pagination.setDatas(datas);
+		}
+		return pagination;
 	}
 
 

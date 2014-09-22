@@ -16,17 +16,11 @@
 	<script type="text/javascript" src="<%=context %>/views/admin/jquery-easyui-1.4/jquery.easyui.min.js"></script>
 </head>
 <body>
-	<table id="dg" title="列表" style="width: 700px; height: 300px"
-		data-options=" toolbar:'#toolbar-1',checkOnSelect:true,selectOnCheck:true,fit:true,rownumbers:true,fitColumns:true,url:'${pageContext.request.contextPath}/sysmanUser/getData',pagination:true ">
+	<table id="dg" class="easyui-datagrid" title="列表" style="width: 700px; height: 300px"
+		data-options="toolbar:'#toolbar-1',checkOnSelect:true,selectOnCheck:true,fit:true,rownumbers:true,fitColumns:true,url:'${pageContext.request.contextPath}/${moduleName}/getData',method:'get',pagination:true,method:'get'">
 		<thead>
 			<tr>
-				<th field="inv" width="80">Inv No</th>
-				<th field="date" width="100">Date</th>
-				<th field="name" width="80">Name</th>
-				<th field="amount" width="80" align="right">Amount</th>
-				<th field="price" width="80" align="right">Price</th>
-				<th field="cost" width="100" align="right">Cost</th>
-				<th field="note" width="110">Note</th>
+				<th data-options="field:'id',width:80">Item ID</th>
 			</tr>
 		</thead>
 	</table>
@@ -88,7 +82,7 @@
 		}
 
 		$(function() {
-			$('#dg').datagrid({ loadFilter : pagerFilter }).datagrid('loadData', getData());
+			//$('#dg').datagrid({ loadFilter : pagerFilter }).datagrid('loadData', getData());
 		});
 	</script>
 </body>

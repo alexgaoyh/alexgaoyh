@@ -1,14 +1,17 @@
 package com.alexgaoyh.common.dao.impl;
 
 
-import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.CriteriaSpecification;
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Projections;
 import org.springframework.orm.hibernate4.HibernateTemplate;
 
 import com.alexgaoyh.common.dao.BaseDao;
@@ -71,6 +74,21 @@ public class BaseDaoImpl<E extends BaseEntity> extends HibernateTemplate impleme
 	@Override
 	public E get(Integer pid) {
 		return (E) this.getSessionFactory().getCurrentSession().get(this.clazz, pid);
+	}
+
+	@Override
+	public int getRowCountByDetachedCriteria(DetachedCriteria condition) {
+		Criteria criteria = condition.getExecutableCriteria(this.getSessionFactory().getCurrentSession());
+		Long totalCount = (Long) criteria.setProjection(Projections.rowCount()).uniqueResult();
+		return totalCount == null ? 0 : totalCount.intValue();
+	}
+
+	@Override
+	public List<E> findByDetachedCriteria(DetachedCriteria condition, int page, int rows) {
+		Criteria criteria = condition.getExecutableCriteria(this.getSessionFactory().getCurrentSession());
+		criteria.setFirstResult((page - 1) * rows).setMaxResults(rows);
+		criteria.setResultTransformer(CriteriaSpecification.ROOT_ENTITY);
+		return criteria.list();
 	}
 
 }

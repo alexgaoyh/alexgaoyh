@@ -22,7 +22,7 @@ import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
  * @Fri Aug 08 13:29:41 CST 2014
  */
 @Controller
-@RequestMapping(value="sysmanResource")
+@RequestMapping(value="admin/sysmanResource")
 public class SysmanResourceAction extends BaseController<SysmanResource> {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanResource.class);

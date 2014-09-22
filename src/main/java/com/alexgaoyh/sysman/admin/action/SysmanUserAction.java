@@ -20,7 +20,7 @@ import com.alexgaoyh.sysman.admin.service.SysmanUserService;
  * @Fri Aug 08 14:25:29 CST 2014
  */
 @Controller
-@RequestMapping(value="sysmanUser")
+@RequestMapping(value="admin/sysmanUser")
 public class SysmanUserAction extends BaseController<SysmanUser>  {
 
 	private static final Logger LOGGER = Logger.getLogger(SysmanUser.class);
