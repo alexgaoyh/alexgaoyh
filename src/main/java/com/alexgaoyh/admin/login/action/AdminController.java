@@ -32,9 +32,9 @@ import com.alexgaoyh.sysman.admin.util.SysmanResourceUtil;
 
 @Controller
 @RequestMapping(value="admin")
-public class AdminAction {
+public class AdminController {
 
-	private static final Logger LOGGER = Logger.getLogger(AdminAction.class);
+	private static final Logger LOGGER = Logger.getLogger(AdminController.class);
 	
 	/**
 	 * 登陆页
