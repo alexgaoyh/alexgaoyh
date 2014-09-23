@@ -67,5 +67,15 @@ public class BaseServiceImpl <E extends BaseEntity> implements BaseService<E>{
 		return pagination;
 	}
 
+	@Override
+	public void save(E entity) throws Exception {
+		this.getBaseDao().save(entity);
+	}
+
+	@Override
+	public void update(E entity) throws Exception {
+		this.getBaseDao().update(entity);
+	}
+
 
 }

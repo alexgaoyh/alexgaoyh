@@ -91,4 +91,14 @@ public class BaseDaoImpl<E extends BaseEntity> extends HibernateTemplate impleme
 		return criteria.list();
 	}
 
+	@Override
+	public void save(E entity) throws Exception {
+		this.getSessionFactory().getCurrentSession().save(entity);
+	}
+
+	@Override
+	public void update(E entity) throws Exception {
+		this.getSessionFactory().getCurrentSession().update(entity);
+	}
+
 }

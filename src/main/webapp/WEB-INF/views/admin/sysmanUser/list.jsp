@@ -4,6 +4,7 @@
 	String context = request.getContextPath();
 	pageContext.setAttribute("context_", context);
 %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,20 +36,40 @@
 		<a href="#" class="easyui-linkbutton remove" iconCls="icon-remove" plain="true">删除</a>
 	</div>
 	
-	<div id="dlg-1" class="easyui-dialog" style="width: 600px; height: 280px; padding: 10px 20px" closed="true" buttons="#dlg-buttons-1">
-		<div class="form-info-title">数据参数</div>
+	<div id="dlg-1" class="easyui-dialog" title="数据参数" style="width: 600px; height: 280px; padding: 10px 20px" closed="true" buttons="#dlg-buttons-1">
 		<form method="post">
-			<input type="hidden" name="pid" />
-			<div class="form-info-item">
-				<label>名称:</label>
-				<input name="realName" class="easyui-validatebox" required="true">
-			</div>
+			<table cellpadding="5">
+				<tr>
+					<td><input type="hidden" name="pid" /></td>
+				</tr>
+	    		<tr>
+	    			<td>用户名:</td>
+	    			<td><input class="easyui-textbox" type="text" name="realName" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>密码:</td>
+	    			<td><input class="easyui-textbox" type="password" name="password" data-options="required:true"></input></td>
+	    		</tr>
+	    		<tr>
+	    			<td>角色:</td>
+	    			<td>
+	    				<table class="table-info-form">
+							<c:forEach var="sysmanRole" items="${sysmanRoleList}">
+								<tr >
+									<td class="info-label">${sysmanRole.name }</td>
+									<td class="info-controller"> <input id="${sysmanRole.pid }" value ="${sysmanRole.pid }"  type ="checkbox" name ="roles.pid" />  </td>
+								</tr>
+							</c:forEach>
+						</table>
+					</td>
+	    		</tr>
+	    	</table>
 		</form>
 	</div>
 	
 	<div id="dlg-buttons-1">
-		<a href="#" class="easyui-linkbutton  save" iconCls="icon-ok">保存</a> <a
-			href="#" class="easyui-linkbutton cancel" iconCls="icon-cancel">取消</a>
+		<a href="#" class="easyui-linkbutton  save" iconCls="icon-ok">保存</a> 
+		<a href="#" class="easyui-linkbutton cancel" iconCls="icon-cancel">取消</a>
 	</div>
 	
 	<script type="text/javascript">

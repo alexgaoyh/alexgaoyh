@@ -32,5 +32,15 @@ public interface BaseService<E extends BaseEntity> {
 
 	Pagination<E> getPageData(DetachedCriteria condition, int page, int rows);
 	
+	/**
+	 * 保存 entity
+	 * 
+	 * @param entity
+	 * @throws ValidateException 
+	 */
+	void save(E entity) throws Exception;
+	
+	void update(E entity) throws Exception;
+	
 	
 }

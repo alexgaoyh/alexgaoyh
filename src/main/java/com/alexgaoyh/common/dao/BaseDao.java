@@ -30,4 +30,8 @@ public interface BaseDao<E extends BaseEntity> {
 	int getRowCountByDetachedCriteria(DetachedCriteria condition);
 
 	List<E> findByDetachedCriteria(DetachedCriteria condition, int page, int rows);
+	
+	void save(E entity) throws Exception;
+	
+	void update(E entity) throws Exception;
 }

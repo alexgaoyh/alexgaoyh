@@ -2,8 +2,6 @@ package com.alexgaoyh.common.action;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +9,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.ArrayUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Expression;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -22,17 +19,14 @@ import com.alexgaoyh.common.service.BaseService;
 import com.alexgaoyh.common.util.JsonUtil;
 import com.alexgaoyh.common.util.Pagination;
 import com.alexgaoyh.common.vo.Data;
+import com.alexgaoyh.common.vo.Result;
 import com.alexgaoyh.util.GenericUtil;
 
 public abstract class BaseController<E extends BaseEntity> {
 	
-	@Autowired  
-	private  HttpServletRequest request; 
-	
 	protected BaseService<E> baseService;
 	
 	private Class<E> entityClass;
-	protected E entity;
 	
 	public abstract void setBaseService(BaseService<E> baseService);
 
@@ -44,7 +38,6 @@ public abstract class BaseController<E extends BaseEntity> {
 	public BaseController() {
 		try {
 			entityClass = GenericUtil.getActualClass(this.getClass(), 0);
-			entity = (E) entityClass.newInstance();
 		} catch (Exception e) {
 			e.getStackTrace();
 		}
@@ -57,7 +50,7 @@ public abstract class BaseController<E extends BaseEntity> {
 	 * @return
 	 */
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(ModelAndView model) {
 		RequestMapping rm = this.getClass().getAnnotation(RequestMapping.class);
 		String moduleName = "";
 		if (rm != null) {
@@ -69,10 +62,10 @@ public abstract class BaseController<E extends BaseEntity> {
 		if (moduleName.endsWith("/")) {
 			moduleName = moduleName.substring(0, moduleName.length() - 1);
 		}
-		System.out.println(moduleName);
-		Map<String, String> _temp = new HashMap<String, String>();
-		_temp.put("moduleName", moduleName);
-		return new ModelAndView("views/" + moduleName + "/list",  _temp);
+		
+		model.setViewName("views/" + moduleName + "/list");
+		model.addObject("moduleName", moduleName);
+		return model;
 	}
 	
 	
@@ -110,4 +103,79 @@ public abstract class BaseController<E extends BaseEntity> {
 		writer.flush();
 	}
 	
+	/**
+	 * 保存
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="doSave")
+    @ResponseBody
+	public String doSave(HttpServletResponse response, E entity) throws IOException  {
+		Result result = null;
+		try {
+			beforeDoSave();
+			this.getBaseService().save(entity);
+			afterDoSave();
+			result = new Result(true, "保存成功！");
+		} catch (Exception e) {
+			result = new Result(false, "保存失败！"+e.getMessage());
+		} finally {
+			this.renderJson(result, response);
+		}
+
+		return null;
+	}
+
+	protected void beforeDoSave() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	protected void afterDoSave() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	/**
+	 * 更新
+	 * 
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="doUpdate")
+    @ResponseBody
+	public String doUpdate(HttpServletResponse response, E entity) throws IOException {
+		Result result = null;
+		try {
+			beforeDoUpdate();
+			this.getBaseService().update(entity);
+			afterDoUpdate();
+			result = new Result(true, "更新成功！");
+		} catch (Exception e) {
+			result = new Result(false, "更新失败！"+e.getMessage());
+		} finally {
+			this.renderJson(result, response);
+		}
+		return null;
+	}
+
+	protected void beforeDoUpdate() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	protected void afterDoUpdate() throws Exception {
+		
+	}
+	
+	
+
+	public Class<E> getEntityClass() {
+		return entityClass;
+	}
+
+	public void setEntityClass(Class<E> entityClass) {
+		this.entityClass = entityClass;
+	}
+
 }
