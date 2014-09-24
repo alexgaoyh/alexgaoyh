@@ -111,7 +111,7 @@ $.extend(DataGridEasyui.prototype, {
 		if (!rows || rows.length > 0) {
 			$.messager.confirm('确认', '你确定要删除所选的记录吗?', function(r) {
 				if (r) {
-					$.post(this_.getController("logicDelete"), {
+					$.post(context_ + "/" + this_.getController("logicDelete"), {
 						pids : $.map(rows, function(row) {
 							return row.pid;
 						}).join("::")
@@ -140,6 +140,7 @@ $.extend(DataGridEasyui.prototype, {
 	 */
 	resetForm:function(form){
 		var form =  $(form);
+		form.form('clear');
 		form[0].reset();
 		form.find("[type=hidden]").val("");
 	},

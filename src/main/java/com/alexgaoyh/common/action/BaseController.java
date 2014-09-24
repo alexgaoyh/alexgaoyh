@@ -111,12 +111,12 @@ public abstract class BaseController<E extends BaseEntity> {
 	 */
 	@RequestMapping(value="doSave")
     @ResponseBody
-	public String doSave(HttpServletResponse response, E entity) throws IOException  {
+	public String doSave(HttpServletRequest request, HttpServletResponse response, E entity) throws IOException  {
 		Result result = null;
 		try {
-			beforeDoSave();
+			beforeDoSave(request, entity);
 			this.getBaseService().save(entity);
-			afterDoSave();
+			afterDoSave(request, entity);
 			result = new Result(true, "保存成功！");
 		} catch (Exception e) {
 			result = new Result(false, "保存失败！"+e.getMessage());
@@ -127,11 +127,11 @@ public abstract class BaseController<E extends BaseEntity> {
 		return null;
 	}
 
-	protected void beforeDoSave() throws Exception {
+	protected void beforeDoSave(HttpServletRequest request, E entity) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
-	protected void afterDoSave() throws Exception {
+	protected void afterDoSave(HttpServletRequest request, E entity) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -144,12 +144,12 @@ public abstract class BaseController<E extends BaseEntity> {
 	 */
 	@RequestMapping(value="doUpdate")
     @ResponseBody
-	public String doUpdate(HttpServletResponse response, E entity) throws IOException {
+	public String doUpdate(HttpServletRequest request, HttpServletResponse response, E entity) throws IOException {
 		Result result = null;
 		try {
-			beforeDoUpdate();
+			beforeDoUpdate(request, entity);
 			this.getBaseService().update(entity);
-			afterDoUpdate();
+			afterDoUpdate(request, entity);
 			result = new Result(true, "更新成功！");
 		} catch (Exception e) {
 			result = new Result(false, "更新失败！"+e.getMessage());
@@ -159,16 +159,40 @@ public abstract class BaseController<E extends BaseEntity> {
 		return null;
 	}
 
-	protected void beforeDoUpdate() throws Exception {
+	protected void beforeDoUpdate(HttpServletRequest request, E entity) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	protected void afterDoUpdate() throws Exception {
+	protected void afterDoUpdate(HttpServletRequest request, E entity) throws Exception {
 		
 	}
 	
-	
+	/**
+	 * 删除
+	 * @param request
+	 * @return
+	 * @throws IOException
+	 */
+	@RequestMapping(value="logicDelete")
+    @ResponseBody
+	public String logicDelete(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		Result result = null;
+		try {
+			String pids = request.getParameter("pids");
+			if (pids != null) {
+				this.getBaseService().deleteLogicByIds(pids.split("::"));
+				result = new Result(true, "删除成功！");
+			} else {
+				result = new Result(false, "没有参数，非法操作！");
+			}
+		} catch (Exception e) {
+			result = new Result(false, "更新失败！"+e.getMessage());
+		} finally {
+			this.renderJson(result, response);
+		}
+		return null;
+	}
 
 	public Class<E> getEntityClass() {
 		return entityClass;

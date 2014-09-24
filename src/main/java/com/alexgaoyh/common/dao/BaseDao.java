@@ -34,4 +34,6 @@ public interface BaseDao<E extends BaseEntity> {
 	void save(E entity) throws Exception;
 	
 	void update(E entity) throws Exception;
+	
+	void deleteLogicByIds(String[] pidArray) throws Exception;
 }

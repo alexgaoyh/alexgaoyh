@@ -1,6 +1,7 @@
 package com.alexgaoyh.common.dao.impl;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -99,6 +100,24 @@ public class BaseDaoImpl<E extends BaseEntity> extends HibernateTemplate impleme
 	@Override
 	public void update(E entity) throws Exception {
 		this.getSessionFactory().getCurrentSession().update(entity);
+	}
+
+	@Override
+	public void deleteLogicByIds(String[] pidArray) throws Exception {
+		String hql ="update  "+this.clazz.getName()+" t set   t.deleteFlag = ?  where t.pid in ( :pids ) " ;
+		
+		Query query = this.getSessionFactory().getCurrentSession().createQuery(hql);
+		
+		query.setInteger(0, BaseEntity.DELETE_FLAG_YES);
+		
+		List<Integer> _tempList = new ArrayList<Integer>();
+		for(int i = 0; i < pidArray.length ; i++){
+			_tempList.add(Integer.parseInt(pidArray[i]));
+		}
+		
+		query.setParameterList("pids", _tempList);
+		
+		query.executeUpdate();
 	}
 
 }

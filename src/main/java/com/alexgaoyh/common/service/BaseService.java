@@ -42,5 +42,5 @@ public interface BaseService<E extends BaseEntity> {
 	
 	void update(E entity) throws Exception;
 	
-	
+	void deleteLogicByIds(String[] pidArray) throws Exception;
 }

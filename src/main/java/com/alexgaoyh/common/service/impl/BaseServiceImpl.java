@@ -77,5 +77,10 @@ public class BaseServiceImpl <E extends BaseEntity> implements BaseService<E>{
 		this.getBaseDao().update(entity);
 	}
 
+	@Override
+	public void deleteLogicByIds(String[] pidArray) throws Exception {
+		this.getBaseDao().deleteLogicByIds(pidArray);
+	}
+
 
 }
