@@ -1,5 +1,7 @@
 package com.alexgaoyh.sysman.admin.dao;
 
+import java.util.List;
+
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.common.dao.BaseDao;
 
@@ -12,5 +14,5 @@ import com.alexgaoyh.common.dao.BaseDao;
  */
 public interface SysmanResourceDao extends BaseDao<SysmanResource> {
 	
-
+	List<SysmanResource> getRootResourceList();
 }

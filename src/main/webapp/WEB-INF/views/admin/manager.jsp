@@ -18,7 +18,21 @@
 </head>
 <body  class="easyui-layout">
 
-	<!-- <div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">north region</div> -->
+	<div data-options="region:'north',border:false" style="height:60px;background:#B3DFDA;padding:10px">
+		<div class="easyui-panel,border:false" style="height:40px;">
+			<div class="easyui-layout" data-options="fit:true">
+				<div data-options="region:'west',border:false" style="width:500px;">
+					Welcome, ${sysmanUser.realName}
+				</div>
+				<div data-options="region:'east',border:false">
+					
+				</div>
+				<div data-options="region:'center',border:false" style="width:500px;">
+					<a href="${pageContext.request.contextPath}/admin/logout">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">
 		<ul id="subMenus" class="easyui-tree" 

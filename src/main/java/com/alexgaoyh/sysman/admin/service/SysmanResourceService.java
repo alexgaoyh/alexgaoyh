@@ -1,7 +1,9 @@
 package com.alexgaoyh.sysman.admin.service;
 
-import com.alexgaoyh.sysman.admin.entity.SysmanResource;
+import java.util.List;
+
 import com.alexgaoyh.common.service.BaseService;
+import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 
 /**
  * 
@@ -12,5 +14,5 @@ import com.alexgaoyh.common.service.BaseService;
  */
 public interface SysmanResourceService extends BaseService<SysmanResource> {
 
-	
+	List<SysmanResource> getRootResourceList();
 }

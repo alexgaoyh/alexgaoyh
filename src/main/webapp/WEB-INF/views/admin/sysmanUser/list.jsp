@@ -20,7 +20,7 @@
 </head>
 <body>
 	<table id="dg-1" class="easyui-datagrid" title="列表" style="width: 700px; height: 300px"
-		data-options="toolbar:'#toolbar-1',checkOnSelect:true,selectOnCheck:true,fit:true,rownumbers:true,fitColumns:true,url:'${pageContext.request.contextPath}/${moduleName}/getData',method:'get',pagination:true,method:'get'">
+		data-options="toolbar:'#toolbar-1',checkOnSelect:true,selectOnCheck:true,fit:true,rownumbers:true,fitColumns:true,url:'${pageContext.request.contextPath}/${moduleName}/getData',method:'get',pagination:true">
 		<thead>
 			<tr>
 				<th data-options="field:'ck',checkbox:true"></th>

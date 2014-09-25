@@ -1,5 +1,7 @@
 package com.alexgaoyh.sysman.admin.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -28,6 +30,11 @@ public class SysmanResourceServiceImpl extends BaseServiceImpl<SysmanResource> i
 	
 	private SysmanResourceDao getDao(){
 		return (SysmanResourceDao) this.baseDao ;
+	}
+
+	@Override
+	public List<SysmanResource> getRootResourceList() {
+		return this.getDao().getRootResourceList();
 	}
 	
 

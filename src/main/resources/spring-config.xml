@@ -91,11 +91,11 @@
 		
 		<!-- 泄漏 监控 -->
 		<property name="unreturnedConnectionTimeout">
-			<value>100</value>
+			<value>${c3p0.unreturnedConnectionTimeout}</value>
 		</property>
 
 		<property name="debugUnreturnedConnectionStackTraces">
-			<value>true</value>
+			<value>${c3p0.debugUnreturnedConnectionStackTraces}</value>
 		</property>
 		
 		
