@@ -6,11 +6,11 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import com.alexgaoyh.common.dao.BaseDao;
+import com.alexgaoyh.common.service.impl.BaseServiceImpl;
 import com.alexgaoyh.sysman.admin.dao.SysmanResourceDao;
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
-import com.alexgaoyh.common.dao.BaseDao;
-import com.alexgaoyh.common.service.impl.BaseServiceImpl;
 
 /**
  * 
@@ -37,6 +37,36 @@ public class SysmanResourceServiceImpl extends BaseServiceImpl<SysmanResource> i
 		return this.getDao().getRootResourceList();
 	}
 	
+	@Override
+	public void update(SysmanResource entity) throws Exception {
+		
+		checkErrorMove(entity ,  entity.getParent().getPid());
+		
+		super.update(entity);
+	}
 
-
+	/**
+	 * update操作，移动错误时抛出异常信息
+	 * @param entity
+	 * @param parentId
+	 */
+	private void checkErrorMove(SysmanResource entity, Integer parentId) {
+		if( entity.getPid() == parentId ){
+			throw new RuntimeException("父级知识点不能是自己！");
+		}else{
+			if(entity != null && entity.getSubResource() != null){
+				for(SysmanResource kk : entity.getSubResource()){
+					
+					if( parentId == kk.getPid() ){
+						throw new RuntimeException("父级知识点不能是自己的子知识点！");
+					}else{
+						checkErrorMove(kk,parentId);
+					}
+				}
+			}
+		}
+	}
+	
+	
+	
 }
