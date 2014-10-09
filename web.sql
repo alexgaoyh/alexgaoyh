@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2014-09-20 14:09:31
+Date: 2014-10-09 16:35:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -38,9 +38,8 @@ CREATE TABLE `sysman_resource` (
 -- Records of sysman_resource
 -- ----------------------------
 INSERT INTO `sysman_resource` VALUES ('1', '2014-08-27 16:05:40', '0', '系统管理', '/', '系统管理', '1', '1', null);
-INSERT INTO `sysman_resource` VALUES ('2', '2014-08-06 16:27:16', '0', '页面编辑员', '/', '页面编辑员', '2', '1', null);
-INSERT INTO `sysman_resource` VALUES ('3', '2014-09-15 16:17:48', '0', '用户管理', '/', '用户管理', '1', '1', '1');
-INSERT INTO `sysman_resource` VALUES ('4', '2014-09-15 17:14:37', '0', '权限管理', '/', '权限管理', '2', '1', '1');
+INSERT INTO `sysman_resource` VALUES ('3', '2014-10-09 16:24:36', '0', '用户管理', null, '用户管理', '1', '1', '1');
+INSERT INTO `sysman_resource` VALUES ('4', '2014-10-09 16:35:14', '0', '资源管理', null, '资源管理', '2', '1', '1');
 
 -- ----------------------------
 -- Table structure for `sysman_role`
@@ -106,7 +105,7 @@ CREATE TABLE `sysman_user` (
 -- ----------------------------
 -- Records of sysman_user
 -- ----------------------------
-INSERT INTO `sysman_user` VALUES ('1', '2014-08-27 16:05:33', '0', null, '21232f297a57a5a743894a0e4a801fc3', null, null, null, 'admim', '1', 'admin', null);
+INSERT INTO `sysman_user` VALUES ('1', '2014-09-24 09:48:16', '0', 'ab', '21232f297a57a5a743894a0e4a801fc3', 'a', 'a', 'a', 'admim', '1', 'admin', null);
 
 -- ----------------------------
 -- Table structure for `sysman_user_role`

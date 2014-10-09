@@ -20,12 +20,12 @@
 </head>
 <body>
 	<table id="dg-1" class="easyui-treegrid" title="列表" style="width: 700px; height: 300px"
-		data-options="toolbar:'#toolbar-1',idField:'id',treeField:'text',checkOnSelect:true,selectOnCheck:true,fit:true,rownumbers:true,fitColumns:true,url:'${pageContext.request.contextPath}/${moduleName}/getData',method:'get',pagination:true">
+		data-options="toolbar:'#toolbar-1',idField:'pid',treeField:'name',checkOnSelect:true,selectOnCheck:true,fit:true,rownumbers:true,fitColumns:true,url:'${pageContext.request.contextPath}/${moduleName}/getData',method:'get',pagination:true">
 		<thead>
 			<tr>
 				<th data-options="field:'ck',checkbox:true"></th>
-				<th data-options="field:'id'" width="10">编码</th>
-				<th data-options="field:'text'" width="220">名称</th>
+				<th data-options="field:'pid'" width="10">编码</th>
+				<th data-options="field:'name'" width="220">名称</th>
 			</tr>
 		</thead>
 	</table>
@@ -39,9 +39,31 @@
 	<div id="dlg-1" class="easyui-dialog" title="数据参数" style="width: 600px; height: 280px; padding: 10px 20px" closed="true" buttons="#dlg-buttons-1">
 		<form method="post">
 			<table cellpadding="5">
-				<tr><td></td></tr>
 				<tr>
 					<td><input type="hidden" name="pid" /></td>
+				</tr>
+				<tr>
+					<td>名称:</td>
+					<td><input class="easyui-textbox" type="text" name="name" data-options="required:true"></input></td>
+				</tr>
+				<tr>
+					<td>描述:</td>
+					<td><input class="easyui-textbox" type="text" name="description" data-options="required:true"></input></td>
+				</tr>
+				<tr>
+					<td>排序:</td>
+					<td><input class="easyui-textbox" type="text" name="orderNo" data-options="required:true"></input></td>
+				</tr>
+				<tr>
+					<td>父知识点:</td>
+					<td><input class="easyui-combotree" name="parent.pid" id ="parentId" style="width:280px;" data-options="method:'get',required:true" /> </td>
+				</tr>
+				<tr>
+					<td>资源类型:</td>
+					<td>
+						<input type="radio" id="resourceType" name="resourceType" value="1" checked="checked">菜单级别 </input>
+						<input type="radio" id="resourceType" name="resourceType" value="2">按钮级别</input>
+					</td>
 				</tr>
 	    	</table>
 		</form>
@@ -58,7 +80,46 @@
 		
 	
 		$( function() {
+			
+			//前端获取到的list集合，转化为easyui-combotree所需的treenode
+			function listToTreeNode(value){
+				if(value.children){
+					return {id:value.pid,text:value.name,children:$.map(value.children,listToTreeNode)};
+				}else{
+					return {id:value.pid,text:value.name};
+				}
+				
+			}
+			
+			
 			var dg1 = new DataGridEasyui(context_, 1 , templateUrl, 'crud');
+			
+			$.extend(dg1, {
+				add : function() {
+
+					$("#parentId").combotree("loadData",this.dataGrid.treegrid("getData").map(listToTreeNode));
+					
+					DataGridEasyui.prototype.add.call(this);
+					
+				},
+				reload : function() {
+					this.dataGrid.treegrid('reload');	// reload the all rows
+				},
+				edit : function() {
+					
+					var row = this.dataGrid.datagrid('getSelected');
+					var resourceTree = $("#parentId");
+					resourceTree.combotree("loadData",this.dataGrid.treegrid("getData").map(listToTreeNode));
+					resourceTree.combotree("setValue",row['parent.pid']);
+					resourceTree.combotree("setText",row['parent.name']);
+					
+					DataGridEasyui.prototype.edit.call(this);
+					
+				}
+
+			});
+			
+			
 			dg1.init();
 		});
 	</script>

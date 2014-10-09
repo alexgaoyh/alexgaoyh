@@ -1,7 +1,9 @@
 package com.alexgaoyh.sysman.admin.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -46,25 +48,41 @@ public class SysmanResourceAction extends BaseController<SysmanResource> {
 		// TODO Auto-generated method stub
 		List<SysmanResource> _temp = this.getService().getRootResourceList();
 		
-		List<TreeNode> nodes = resourceToTreeNode(_temp);
+		List<Map<String, Object>> nodes = resourceToTree(_temp);
 		
 		this.renderJson(nodes, response);
 		
 	}
 	
-	private List<TreeNode> resourceToTreeNode(List<SysmanResource> all) {
-		List<TreeNode> nodeList = new ArrayList<TreeNode>();
-		for(SysmanResource r : all){
-			TreeNode node = new TreeNode();
-			node.setText(r.getName());
-			node.setState("open");
-			node.setId(r.getPid());
-			if(r.getSubResource() != null && r.getSubResource().size() > 0 ){
-				node.setChildren(this.resourceToTreeNode(r.getSubResource()));
-			} 
-			nodeList.add(node);
+	/**
+	 * 转换为tree类型
+	 * @param sysResourceList  资源list集合
+	 * @return
+	 */
+	private List<Map<String, Object>> resourceToTree(List<SysmanResource> sysResourceList) {
+		List<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+		for(SysmanResource r : sysResourceList){
+			Map<String, Object> item = new HashMap<String, Object>();
+			item.put("resourceType", r.getResourceType());
+			item.put("name", r.getName());
+			item.put("description", r.getDescription());
+			item.put("orderNo", r.getOrderNo());
+			item.put("parent.pid", r.getParent() == null ? "" : r.getParent().getPid());
+			item.put("parent.name", r.getParent() == null ? "" : r.getParent().getName());
+			if (r.getSubResource() != null && r.getSubResource().size() != 0) {
+				item.put("children", this.resourceToTree(r.getSubResource()));
+				item.put("leaf", false);
+			}else{
+				item.put("leaf", true);
+			}
+			item.put("href", r.getHref());
+			item.put("pid", r.getPid());
+			item.put("deleteFlag", r.getDeleteFlag());
+			item.put("createTime", r.getCreateTime());
+			
+			data.add(item);
 		}
-		return nodeList;
+		return data;
 	}
 
 }
