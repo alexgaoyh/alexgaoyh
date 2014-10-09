@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
@@ -39,7 +40,7 @@ public class SysmanRole extends BaseEntity{
 	/**
 	 * 拥有权限
 	 */
-	@ManyToMany(cascade = CascadeType.DETACH)
+	@ManyToMany(cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
 	@JoinTable(name="SYSMAN_ROLE_RESOURCE",joinColumns ={@JoinColumn(name="role_id")},inverseJoinColumns={@JoinColumn(name="resource_id")})
 	@Where(clause="delete_flag=0")
 	private List<SysmanResource> resource;  

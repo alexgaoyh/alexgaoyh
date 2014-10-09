@@ -97,15 +97,21 @@
 			$.extend(dg1, {
 				add : function() {
 
+					DataGridEasyui.prototype.add.call(this);
+
 					$("#parentId").combotree("loadData",this.dataGrid.treegrid("getData").map(listToTreeNode));
 					
-					DataGridEasyui.prototype.add.call(this);
 					
 				},
 				reload : function() {
+					
+					DataGridEasyui.prototype.reload.call(this);
+					
 					this.dataGrid.treegrid('reload');	// reload the all rows
 				},
 				edit : function() {
+
+					DataGridEasyui.prototype.edit.call(this);
 					
 					var row = this.dataGrid.datagrid('getSelected');
 					var resourceTree = $("#parentId");
@@ -113,7 +119,6 @@
 					resourceTree.combotree("setValue",row['parent.pid']);
 					resourceTree.combotree("setText",row['parent.name']);
 					
-					DataGridEasyui.prototype.edit.call(this);
 					
 				}
 
