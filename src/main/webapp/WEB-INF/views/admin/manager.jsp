@@ -68,6 +68,34 @@
 		var mainTabs = $("#main-tabs");
 		function openTab(title, url) {
 			
+			url = permissionsCheck(url);
+			
+			if (mainTabs.tabs('exists', title)) {
+				mainTabs.tabs('select', title);
+				var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
+				if(iframeContext){
+					iframeContext[0].src = context_ + url
+				} 
+			} else {
+				mainTabs.tabs('add', {
+					title : title,
+					content : createFrame(context_ + url),
+					closable : true
+				});
+			}
+
+		}
+
+		function createFrame(url) {
+			var s = '<iframe name="mainFrame" scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0"  allowtransparency="yes" src="'
+					+ url + '" style="width:100%;height:99%;"></iframe>';
+			return s;
+		}
+		
+		function permissionsCheck(url) {
+			
+			var resultStr = '';
+			
 			$.ajax({
 				url : context_+'/admin/permissionsCheck',
 				type : "POST",
@@ -77,34 +105,15 @@
 				async : false,
 				success : function(objJson) {
 					if(objJson.success == true) {
-						if (mainTabs.tabs('exists', title)) {
-							mainTabs.tabs('select', title);
-							var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
-							if(iframeContext){
-								iframeContext[0].src = context_ + url
-							} 
-						} else {
-							mainTabs.tabs('add', {
-								title : title,
-								content : createFrame(context_ + url),
-								closable : true
-							});
-						}
+						resultStr = url;
 					}else{
-						alert(objJson.msg);
+						resultStr = "/admin/denied";
 					}
 				},
 				dataType : "json"
 			});
 			
-			
-
-		}
-
-		function createFrame(url) {
-			var s = '<iframe name="mainFrame" scrolling="auto" frameborder="no" border="0" marginwidth="0" marginheight="0"  allowtransparency="yes" src="'
-					+ url + '" style="width:100%;height:99%;"></iframe>';
-			return s;
+			return resultStr;
 		}
 		
 	</script>
