@@ -67,19 +67,37 @@
 		
 		var mainTabs = $("#main-tabs");
 		function openTab(title, url) {
-			if (mainTabs.tabs('exists', title)) {
-				mainTabs.tabs('select', title);
-				var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
-				if(iframeContext){
-					iframeContext[0].src = context_ + url
-				} 
-			} else {
-				mainTabs.tabs('add', {
-					title : title,
-					content : createFrame(context_ + url),
-					closable : true
-				});
-			}
+			
+			$.ajax({
+				url : context_+'/admin/permissionsCheck',
+				type : "POST",
+				data:{
+					"url":url
+				},
+				async : false,
+				success : function(objJson) {
+					if(objJson.success == true) {
+						if (mainTabs.tabs('exists', title)) {
+							mainTabs.tabs('select', title);
+							var iframeContext = mainTabs.tabs('getTab', title).find("iframe");
+							if(iframeContext){
+								iframeContext[0].src = context_ + url
+							} 
+						} else {
+							mainTabs.tabs('add', {
+								title : title,
+								content : createFrame(context_ + url),
+								closable : true
+							});
+						}
+					}else{
+						alert(objJson.msg);
+					}
+				},
+				dataType : "json"
+			});
+			
+			
 
 		}
 

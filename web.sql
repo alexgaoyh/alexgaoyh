@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50612
 File Encoding         : 65001
 
-Date: 2014-10-13 15:46:00
+Date: 2014-10-13 17:00:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -42,6 +42,7 @@ INSERT INTO `sysman_resource` VALUES ('2', '2014-10-13 15:40:58', '0', '角色�
 INSERT INTO `sysman_resource` VALUES ('3', '2014-10-13 15:40:53', '0', '用户管理', '/admin/sysmanUser/list', '用户管理', '1', '1', '5');
 INSERT INTO `sysman_resource` VALUES ('4', '2014-10-13 15:41:02', '0', '资源管理', '/admin/sysmanResource/list', '资源管理', '3', '1', '5');
 INSERT INTO `sysman_resource` VALUES ('5', '2014-10-13 15:40:45', '0', '账号管理', '/', '账号管理', '1', '1', '1');
+INSERT INTO `sysman_resource` VALUES ('6', '2014-10-13 15:50:53', '0', 'a', '/a', 'a', '2', '1', '1');
 
 -- ----------------------------
 -- Table structure for `sysman_role`
@@ -62,7 +63,7 @@ CREATE TABLE `sysman_role` (
 -- ----------------------------
 -- Records of sysman_role
 -- ----------------------------
-INSERT INTO `sysman_role` VALUES ('1', '2014-10-13 14:50:20', '0', '系统管理员', '系统管理员', null);
+INSERT INTO `sysman_role` VALUES ('1', '2014-10-13 15:51:07', '0', '系统管理员', '系统管理员', null);
 
 -- ----------------------------
 -- Table structure for `sysman_role_resource`
@@ -80,7 +81,10 @@ CREATE TABLE `sysman_role_resource` (
 -- ----------------------------
 -- Records of sysman_role_resource
 -- ----------------------------
-INSERT INTO `sysman_role_resource` VALUES ('1', '1');
+INSERT INTO `sysman_role_resource` VALUES ('1', '5');
+INSERT INTO `sysman_role_resource` VALUES ('1', '3');
+INSERT INTO `sysman_role_resource` VALUES ('1', '2');
+INSERT INTO `sysman_role_resource` VALUES ('1', '4');
 
 -- ----------------------------
 -- Table structure for `sysman_user`

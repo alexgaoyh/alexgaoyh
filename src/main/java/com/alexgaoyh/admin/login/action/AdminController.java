@@ -1,10 +1,12 @@
 package com.alexgaoyh.admin.login.action;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -25,16 +27,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.alexgaoyh.admin.login.shiro.captcha.constant.CaptchaConstant;
+import com.alexgaoyh.common.util.JsonUtil;
+import com.alexgaoyh.common.vo.Result;
 import com.alexgaoyh.common.vo.TreeNode;
 import com.alexgaoyh.sysman.admin.entity.SysmanResource;
 import com.alexgaoyh.sysman.admin.entity.SysmanUser;
-import com.alexgaoyh.sysman.admin.util.SysmanResourceUtil;
+import com.alexgaoyh.sysman.admin.service.SysmanResourceService;
 
 @Controller
 @RequestMapping(value="admin")
 public class AdminController {
 
 	private static final Logger LOGGER = Logger.getLogger(AdminController.class);
+	
+	@Resource(name = "sysmanResourceServiceImpl")
+	private SysmanResourceService sysmanResourceService;
 	
 	/**
 	 * 登陆页
@@ -92,10 +99,7 @@ public class AdminController {
 		Subject subject = SecurityUtils.getSubject();
 		SysmanUser user = (SysmanUser) subject.getPrincipal();
 		
-		List<SysmanResource> sysmanResourceList = SysmanResourceUtil.getResourceListByUser(user);
-		
 		map.put("sysmanUser", user);
-		map.put("sysmanResourceList", sysmanResourceList);
 		
 		return new ModelAndView("views/admin/manager", map);
 
@@ -185,7 +189,7 @@ public class AdminController {
 		Subject subject = SecurityUtils.getSubject();
 		SysmanUser user = (SysmanUser) subject.getPrincipal();
 
-		List<SysmanResource> sysmanResourceList = SysmanResourceUtil.getResourceListByUser(user);
+		List<SysmanResource> sysmanResourceList = sysmanResourceService.getRootResourceList();
 		
 		return JSONObject.valueToString(resourceToTreeNode(sysmanResourceList));
 	}
@@ -219,5 +223,27 @@ public class AdminController {
 		}
 
 		return null;
+	}
+	
+	@RequestMapping(value="permissionsCheck")
+    @ResponseBody
+	private void permissionsCheck(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Result result = null;
+		
+		String url = request.getParameter("url");
+		
+		//权限校验。判断是否包含权限。
+		Subject subject = SecurityUtils.getSubject();
+		//具体响应ShiroDbRealm。doGetAuthorizationInfo，判断是否包含此url的响应权限
+		boolean isPermitted = subject.isPermitted(url);
+		if(isPermitted == true) {
+			result = new Result(true, "包含权限");
+		}else{
+			result = new Result(false, "不包含权限");
+		}
+		response.setContentType("text/plain; charset=UTF-8");
+		PrintWriter writer = response.getWriter();
+		writer.write(JsonUtil.object2String(result)) ;
+		writer.flush();
 	}
 }

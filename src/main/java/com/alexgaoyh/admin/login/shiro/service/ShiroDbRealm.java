@@ -43,9 +43,9 @@ public class ShiroDbRealm extends AuthorizingRealm {
 		for(SysmanRole role : roles ){
 			info.addRole(role.getName());
 			for(SysmanResource resource : role.getResource()){
-				if(SysmanResource.TYPE_MENU != resource.getResourceType() ){
+				if(SysmanResource.TYPE_MENU == resource.getResourceType() ){
 					setMenuPerms(permissions, resource.getParent());
-					permissions.add(resource.getPid() +":"+resource.getParent().getPid() );
+					permissions.add(resource.getHref());
 				}
 			}
 		}
