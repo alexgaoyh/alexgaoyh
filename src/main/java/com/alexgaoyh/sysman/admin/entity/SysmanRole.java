@@ -40,7 +40,7 @@ public class SysmanRole extends BaseEntity{
 	/**
 	 * 拥有权限
 	 */
-	@ManyToMany(cascade = CascadeType.DETACH,fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.DETACH)
 	@JoinTable(name="SYSMAN_ROLE_RESOURCE",joinColumns ={@JoinColumn(name="role_id")},inverseJoinColumns={@JoinColumn(name="resource_id")})
 	@Where(clause="delete_flag=0")
 	private List<SysmanResource> resource;  

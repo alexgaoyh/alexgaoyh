@@ -26,6 +26,7 @@
 				<th data-options="field:'ck',checkbox:true"></th>
 				<th data-options="field:'pid'" width="10">编码</th>
 				<th data-options="field:'name'" width="220">名称</th>
+				<th data-options="field:'href'" width="220">链接</th>
 			</tr>
 		</thead>
 	</table>
@@ -51,12 +52,16 @@
 					<td><input class="easyui-textbox" type="text" name="description" data-options="required:true"></input></td>
 				</tr>
 				<tr>
+					<td>链接:</td>
+					<td><input class="easyui-textbox" type="text" name="href" data-options="required:true"></input></td>
+				</tr>
+				<tr>
 					<td>排序:</td>
 					<td><input class="easyui-textbox" type="text" name="orderNo" data-options="required:true"></input></td>
 				</tr>
 				<tr>
 					<td>父知识点:</td>
-					<td><input class="easyui-combotree" name="parent.pid" id ="parentId" style="width:280px;" data-options="method:'get',required:true" /> </td>
+					<td><input class="easyui-combotree" name="parent.pid" id ="parentId" style="width:280px;" data-options="method:'get'" /> </td>
 				</tr>
 				<tr>
 					<td>资源类型:</td>
